@@ -1,0 +1,345 @@
+:root {
+    --ink: #f2f0ed;
+    --ink-dim: #a3a09b;
+    --accent: #d5001c;
+    --bg: #0b0b0c;
+    --panel-width: 30rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* The stage holds everything the user sees; #track only provides scroll length. */
+#stage {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+}
+
+#stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(120% 90% at 22% 42%, #24262b 0%, #101113 45%, var(--bg) 100%);
+}
+
+#scene {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* Vertical swipes stay with the browser so touch scrolling keeps working. */
+    touch-action: pan-y;
+}
+
+#scene.is-grabbable {
+    cursor: grab;
+}
+
+#scene.is-dragging {
+    cursor: grabbing;
+}
+
+#track {
+    height: 400vh;
+}
+
+/* Panels */
+#panels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.panel {
+    position: absolute;
+    top: 50%;
+    right: max(9vw, 2rem);
+    width: min(var(--panel-width), 40vw);
+    transform: translateY(-50%);
+    opacity: 0;
+    will-change: opacity, transform;
+}
+
+.panel__eyebrow {
+    margin: 0 0 1rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.panel h1,
+.panel h2 {
+    margin: 0 0 1.4rem;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.panel h1 {
+    font-size: clamp(2.4rem, 4.4vw, 4rem);
+}
+
+.panel h1 em {
+    display: block;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.panel h2 {
+    font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+}
+
+.panel p {
+    margin: 0 0 1.1rem;
+    font-size: 0.98rem;
+    color: var(--ink-dim);
+    max-width: 34rem;
+}
+
+.panel__lead {
+    font-size: 1.12rem !important;
+    color: var(--ink) !important;
+}
+
+.specs {
+    margin: 2rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.specs > div {
+    background: rgba(12, 12, 14, 0.72);
+    padding: 0.8rem 0.9rem;
+}
+
+.specs dt {
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+}
+
+.specs dd {
+    margin: 0.25rem 0 0;
+    font-size: 0.92rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.scroll-hint {
+    margin-top: 2.4rem !important;
+    font-size: 0.68rem !important;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+}
+
+.scroll-hint::after {
+    content: "";
+    display: inline-block;
+    width: 3.5rem;
+    height: 1px;
+    margin-left: 0.9rem;
+    vertical-align: middle;
+    background: currentColor;
+    animation: hint 2.4s ease-in-out infinite;
+    transform-origin: left center;
+}
+
+@keyframes hint {
+    0%, 100% { transform: scaleX(0.35); opacity: 0.4; }
+    50%      { transform: scaleX(1);    opacity: 1; }
+}
+
+/* Chapter nav */
+#chapterNav {
+    position: absolute;
+    left: max(3vw, 1.5rem);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    z-index: 3;
+}
+
+#chapterNav button {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--ink-dim);
+    font: inherit;
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    opacity: 0.45;
+    transition: opacity 0.35s ease, color 0.35s ease;
+}
+
+#chapterNav button span {
+    width: 1.4rem;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.35s ease;
+}
+
+#chapterNav button:hover,
+#chapterNav button.is-active {
+    opacity: 1;
+    color: var(--ink);
+}
+
+#chapterNav button.is-active span {
+    width: 2.8rem;
+    background: var(--accent);
+}
+
+#credit {
+    position: absolute;
+    left: max(3vw, 1.5rem);
+    bottom: 1.4rem;
+    font-size: 0.68rem;
+    color: rgba(163, 160, 155, 0.65);
+    z-index: 3;
+}
+
+#credit a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+#credit a:hover {
+    color: var(--ink);
+}
+
+/* Loader */
+#loader {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+    background: var(--bg);
+    transition: opacity 0.7s ease;
+}
+
+#loader.is-done {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader__mark {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.5em;
+    text-indent: 0.5em;
+}
+
+.loader__bar {
+    display: block;
+    width: 9rem;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.loader__bar i {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.25s ease;
+}
+
+/* Tune overlay, enabled with #tune */
+#tune {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    z-index: 5;
+    padding: 0.8rem 1rem;
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    white-space: pre;
+}
+
+@media (max-width: 900px) {
+    .panel {
+        top: auto;
+        bottom: max(5vh, 3.5rem);
+        left: max(5vw, 1.25rem);
+        right: max(5vw, 1.25rem);
+        width: auto;
+        transform: none;
+    }
+
+    .panel p {
+        font-size: 0.9rem;
+    }
+
+    .panel__lead {
+        font-size: 1rem !important;
+    }
+
+    .specs {
+        margin-top: 1.4rem;
+    }
+
+    #chapterNav {
+        top: auto;
+        bottom: 1.2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: row;
+        gap: 0.9rem;
+    }
+
+    #chapterNav button {
+        font-size: 0;
+        letter-spacing: 0;
+    }
+
+    #chapterNav button span {
+        width: 1.6rem;
+    }
+
+    #credit {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 3.4rem;
+        text-align: center;
+        white-space: nowrap;
+        font-size: 0.6rem;
+    }
+}

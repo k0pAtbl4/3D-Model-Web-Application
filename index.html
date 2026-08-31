@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1975 Porsche 911 Turbo</title>
+    <meta name="description" content="The 1975 Porsche 911 Turbo (930), the car that put a turbocharger in the back of a road-going 911.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+
+    <div id="loader">
+        <span class="loader__mark">930</span>
+        <span class="loader__bar"><i id="loaderFill"></i></span>
+    </div>
+
+    <div id="stage">
+        <canvas id="scene"></canvas>
+
+        <nav id="chapterNav" aria-label="Chapters">
+            <button type="button" data-chapter="0"><span></span>Overview</button>
+            <button type="button" data-chapter="1"><span></span>Engine</button>
+            <button type="button" data-chapter="2"><span></span>Chassis</button>
+            <button type="button" data-chapter="3"><span></span>The car</button>
+        </nav>
+
+        <div id="panels">
+            <article class="panel" data-chapter="0">
+                <p class="panel__eyebrow">Type 930</p>
+                <h1>1975 Porsche <em>911 Turbo</em></h1>
+                <p class="panel__lead">
+                    Porsche had already won with turbocharging on the track, and the 930 was the
+                    answer to whether the same trick would survive on a road car. It did, loudly.
+                </p>
+                <p>
+                    Everything about it is wider than the 911 it grew out of. Flared arches to cover
+                    the rear tyres, a chin spoiler, and the whale tail that everyone remembers.
+                    Around 250 km/h flat out made it one of the fastest cars you could buy in 1975,
+                    and it came with leather, air conditioning and electric windows as standard,
+                    because Porsche wanted it sold as a grand tourer rather than a homologation special.
+                </p>
+                <dl class="specs">
+                    <div><dt>Built</dt><dd>1975&ndash;1977 (3.0)</dd></div>
+                    <div><dt>Layout</dt><dd>Rear engine, rear drive</dd></div>
+                    <div><dt>Kerb weight</dt><dd>approx. 1,140 kg</dd></div>
+                </dl>
+                <p class="scroll-hint">Scroll</p>
+            </article>
+
+            <article class="panel" data-chapter="1">
+                <p class="panel__eyebrow">Under the bonnet, sort of</p>
+                <h2>Three litres, one turbo, no intercooler</h2>
+                <p>
+                    The bonnet you are looking at covers the luggage. The engine lives at the other
+                    end: a 2,994 cc air-cooled flat-six with a single KKK turbocharger and Bosch
+                    K-Jetronic injection. Compression dropped to 6.5:1 to live with the boost, which
+                    is why it feels flat until the turbo wakes up and then arrives all at once.
+                </p>
+                <p>
+                    Porsche fitted a four-speed gearbox rather than the five-speed from the Carrera,
+                    because the torque would have eaten it. With that much shove per gear, four was
+                    enough.
+                </p>
+                <dl class="specs">
+                    <div><dt>Engine</dt><dd>2,994 cc air-cooled flat-six</dd></div>
+                    <div><dt>Power</dt><dd>260 PS at 5,500 rpm</dd></div>
+                    <div><dt>Torque</dt><dd>343 Nm at 4,000 rpm</dd></div>
+                    <div><dt>Gearbox</dt><dd>4-speed manual</dd></div>
+                    <div><dt>0&ndash;100 km/h</dt><dd>approx. 5.5 s</dd></div>
+                    <div><dt>Top speed</dt><dd>approx. 250 km/h</dd></div>
+                </dl>
+            </article>
+
+            <article class="panel" data-chapter="2">
+                <p class="panel__eyebrow">Rear axle</p>
+                <h2>All the weight sits over this wheel</h2>
+                <p>
+                    The rear tyres are wider than the fronts and the arches were flared to cover them.
+                    Fuchs forged alloys, 7 inches wide at the front and 8 at the rear, on tyres that
+                    were about as much rubber as anyone offered on a road car at the time.
+                </p>
+                <p>
+                    Suspension is semi-trailing arms and torsion bars, with the engine hanging behind
+                    the axle line. That layout gives astonishing traction out of a corner and a very
+                    short temper if you lift off mid-bend. The reputation the 930 earned for biting
+                    back came from exactly this part of the car.
+                </p>
+                <dl class="specs">
+                    <div><dt>Front</dt><dd>7J&times;15, 185/70 VR15</dd></div>
+                    <div><dt>Rear</dt><dd>8J&times;15, 215/60 VR15</dd></div>
+                    <div><dt>Brakes</dt><dd>Vented discs all round</dd></div>
+                </dl>
+            </article>
+        </div>
+
+        <footer id="credit">
+            Model: <a href="https://sketchfab.com/3d-models/free-1975-porsche-911-930-turbo-8568d9d14a994b9cae59499f0dbed21e" target="_blank" rel="noopener">FREE 1975 Porsche 911 (930) Turbo</a>
+            by <a href="https://sketchfab.com/lionsharp" target="_blank" rel="noopener">Lionsharp Studios</a>,
+            <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC&nbsp;BY&nbsp;4.0</a>
+        </footer>
+    </div>
+
+    <div id="track" aria-hidden="true"></div>
+
+    <script type="module" src="main.js"></script>
+
+</body>
+</html>
